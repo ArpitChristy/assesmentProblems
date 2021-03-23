@@ -24,13 +24,12 @@ public class restController {
     }
 
     @PostMapping("/palindromes")
-    public ResponseEntity<?> savePalindrome(@RequestParam(required = true) Palindrome palindrome){
+    public ResponseEntity<?> savePalindrome(@RequestBody(required = true) Palindrome palindrome){
         try{
             palindromeRepository.save(palindrome);
             return new ResponseEntity<>("Created a new palindrome successfully!", HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
 }
