@@ -3,41 +3,26 @@ import java.util.Scanner;
 public class binaryReversal {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        String res = solveReversal(input);
+        int input = sc.nextInt();
+        int res = solveReversal(input);
         System.out.println(res);
     }
-    public static String solveReversal(String input){
-        StringBuilder newInput = new StringBuilder();
-        // append zeroes first
-        while(8 - (newInput.length()+input.length()) >= 0){
-            newInput.append("0");
-            System.out.println("string is "  + newInput + "length is " + newInput.length());
+    public static int solveReversal(int input){
+
+        String binaryInput = Integer.toBinaryString(input);
+
+        String paddedBinaryInput = "";
+        //add necessary zeros
+        while(paddedBinaryInput.length() + binaryInput.length() < 8){
+            paddedBinaryInput += "0";
         }
-        // now append the real input
-        newInput.append(input);
+        paddedBinaryInput += binaryInput;
+        // reverse the input binary number
+        String reversedBinaryInput = new StringBuilder(paddedBinaryInput).reverse().toString();
 
-        // then reverse it and return decimal value
-        int rev = 0;
-        int n = Integer.valueOf(String.valueOf(newInput));
-        // traversing bits of 'n'
-        // from the right
-        while (n > 0)
-        {
-            // bitwise left shift
-            // 'rev' by 1
-            rev <<= 1;
+        //return the decimal value
+        int res = Integer.parseInt(reversedBinaryInput,2);
 
-            // if current bit is '1'
-            if ((int)(n & 1) == 1)
-                rev ^= 1;
-
-            // bitwise right shift
-            //'n' by 1
-            n >>= 1;
-        }
-        // required number
-        System.out.println(rev);
-        return "HI";
+        return res;
     }
 }
